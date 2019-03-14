@@ -17,7 +17,6 @@ import blue from "@material-ui/core/colors/blue";
 import * as formActions from "../../actions/form";
 import * as snackbarActions from "../../actions/snackbar";
 import CleanLink from "../misc/CleanLink";
-import Smokey from "../../res/images/smokey.jpg";
 
 const styles = theme => ({
   passwordField: {
@@ -37,7 +36,8 @@ const styles = theme => ({
   wallpaper: {
     height: "100vh",
     background: "orange",
-    backgroundImage: `url(${Smokey})`,
+    backgroundColor: "rgb(26, 127, 181)",
+    // backgroundImage: `url(${Smokey})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat"
@@ -173,8 +173,8 @@ class CreatePin extends React.Component {
                     align="center"
                     style={{ margin: "1em 0" }}
                   >
-                    Please create a pin, this pin is required for editing your
-                    own form.
+                    Please create a pin, this pin is required for uploading
+                    payment receipt and editing your own form.
                   </Typography>
                   <form onSubmit={handleSubmit(this.onSubmit)}>
                     <FormControl component="fieldset" style={{ width: "100%" }}>

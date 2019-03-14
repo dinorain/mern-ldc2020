@@ -15,7 +15,6 @@ import * as eventActions from "../../actions/event";
 import * as formActions from "../../actions/form";
 import * as snackbarActions from "../../actions/snackbar";
 import CleanLink from "../misc/CleanLink";
-import Smokey from "../../res/images/smokey.jpg";
 import PinLoginDialog from "./PinLoginDialog";
 
 const styles = theme => ({
@@ -27,7 +26,8 @@ const styles = theme => ({
     width: "100vw",
     height: "100vh",
     zIndex: "-10",
-    backgroundImage: `url(${Smokey})`,
+    backgroundColor: "rgb(26, 127, 181)",
+    // backgroundImage: `url(${Smokey})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"

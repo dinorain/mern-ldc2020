@@ -111,7 +111,9 @@ class MainIndex extends Component {
         </Fade>
         <div
           className={classes.root}
-          style={{ backgroundImage: `url(${this.state.backgroundImage})` }}
+          style={{
+            background: `url(${this.state.backgroundImage})`
+          }}
         />
         <div>
           <SlideShow />

@@ -17,7 +17,6 @@ import blue from "@material-ui/core/colors/blue";
 import * as formActions from "../../actions/form";
 import * as snackbarActions from "../../actions/snackbar";
 import CleanLink from "../misc/CleanLink";
-import Smokey from "../../res/images/smokey.jpg";
 
 const styles = theme => ({
   passwordField: {
@@ -37,7 +36,8 @@ const styles = theme => ({
   wallpaper: {
     height: "100vh",
     background: "orange",
-    backgroundImage: `url(${Smokey})`,
+    backgroundColor: "rgb(26, 127, 181)",
+    // backgroundImage: `url(${Smokey})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat"

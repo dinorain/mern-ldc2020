@@ -19,7 +19,6 @@ import * as eventActions from "../../actions/event";
 import * as formActions from "../../actions/form";
 import * as snackbarActions from "../../actions/snackbar";
 import CleanLink from "../misc/CleanLink";
-import Smokey from "../../res/images/smokey.jpg";
 import PinLoginDialog from "./PinLoginDialog";
 
 const styles = theme => ({
@@ -31,7 +30,8 @@ const styles = theme => ({
     width: "100vw",
     height: "100vh",
     zIndex: "-10",
-    backgroundImage: `url(${Smokey})`,
+    backgroundColor: "rgb(26, 127, 181)",
+    // backgroundImage: `url(${Smokey})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"
@@ -94,6 +94,7 @@ const LOADING = "LOADING",
 
 class PaymentReceipt extends React.Component {
   state = {
+    uploadedOnce: false,
     status: LOADING,
     uploadStatus: null,
     PinLoginDialog: true,
@@ -131,7 +132,8 @@ class PaymentReceipt extends React.Component {
       }
       this.setState({
         uploadStatus: DONE,
-        imageUrl: form.paymentReceipt.secureUrl
+        imageUrl: form.paymentReceipt.secureUrl,
+        uploadedOnce: true
       });
       successSnackbar("Changes saved!");
     });
@@ -173,26 +175,6 @@ class PaymentReceipt extends React.Component {
     );
   };
 
-  renderRadio = field => {
-    const { error, touched } = field.meta;
-    const { classes, ...props } = field;
-    return (
-      <FormControl component="fieldset" className={classes}>
-        <FormLabel component="legend">{field.label}</FormLabel>
-        <RadioGroup {...props} {...field.input}>
-          {field.children}
-        </RadioGroup>
-        <p>
-          {touched ? (
-            <span style={{ color: "red" }}>{error}</span>
-          ) : (
-            <p>&nbsp;</p>
-          )}
-        </p>
-      </FormControl>
-    );
-  };
-
   toggleDialog = stateName => open =>
     this.setState(state => ({
       [stateName]: open === undefined ? !Boolean(state[stateName]) : open
@@ -201,9 +183,10 @@ class PaymentReceipt extends React.Component {
   render() {
     const {
       classes,
-      form: { status: formStatus }
+      form: { status: formStatus },
+      history
     } = this.props;
-    const { status, uploadStatus, pin, imageUrl } = this.state;
+    const { status, uploadStatus, pin, imageUrl, uploadedOnce } = this.state;
 
     return pin ? (
       status === DONE ? (
@@ -219,7 +202,7 @@ class PaymentReceipt extends React.Component {
             <Grid item sm={10}>
               <Fade bottom>
                 <Typography variant="h3" gutterBottom className={classes.title}>
-                  Eventicus
+                  Leadership Development Camp 2019
                 </Typography>
               </Fade>
               <Fade bottom>
@@ -270,10 +253,24 @@ class PaymentReceipt extends React.Component {
                         ? "Please wait for our admin's approval"
                         : ""}
                     </Typography>
+
+                    {uploadedOnce && (
+                      <Button
+                        type="submit"
+                        color="primary"
+                        variant="contained"
+                        onClick={() => history.push("/main")}
+                        className={classes.submitButton}
+                        disabled={uploadStatus === LOADING}
+                      >
+                        Done
+                      </Button>
+                    )}
+                    <br />
+                    <br />
                     <Button
-                      variant="contained"
+                      variant={uploadedOnce ? "outlined" : "contained"}
                       color="primary"
-                      label="My Label"
                       disabled={
                         uploadStatus === LOADING ||
                         formStatus === "ACCEPTED" ||
@@ -281,8 +278,9 @@ class PaymentReceipt extends React.Component {
                       }
                       onClick={e => console.log(this.refs.upload.click())}
                     >
-                      Choose file...
+                      {uploadedOnce ? "Upload again..." : "Upload..."}
                     </Button>
+
                     <div>
                       <Typography
                         variant="subtitle2"
@@ -309,21 +307,6 @@ class PaymentReceipt extends React.Component {
                 </Grid>
               </Grid>
 
-              <Grid container justify="center">
-                <Grid item xs={11}>
-                  <CleanLink to="/main">
-                    <Button
-                      type="submit"
-                      color="secondary"
-                      variant="outlined"
-                      className={classes.submitButton}
-                      fullWidth
-                    >
-                      Exit
-                    </Button>
-                  </CleanLink>
-                </Grid>
-              </Grid>
               <br />
             </Grid>
           </Grid>

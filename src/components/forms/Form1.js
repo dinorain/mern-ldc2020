@@ -9,6 +9,11 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {
@@ -20,7 +25,6 @@ import {
 import * as eventActions from "../../actions/event";
 import * as formActions from "../../actions/form";
 import * as snackbarActions from "../../actions/snackbar";
-import Smokey from "../../res/images/smokey.jpg";
 
 const styles = theme => ({
   wallpaper: {
@@ -31,7 +35,8 @@ const styles = theme => ({
     width: "100vw",
     height: "100vh",
     zIndex: "-10",
-    backgroundImage: `url(${Smokey})`,
+    backgroundColor: "rgb(26, 127, 181)",
+    // backgroundImage: `url(${Smokey})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "100%"
@@ -74,9 +79,7 @@ const fieldNames = [
   "Line ID",
   "Phone Number",
   "Email",
-  "Purpose of Joining",
-  "Vegetarian/Non Vegetarian",
-  "Food Alergic"
+  "Vegetarian/Non Vegetarian"
 ];
 
 // FETCHING DATA STATUS
@@ -115,6 +118,49 @@ class Form1 extends React.Component {
       console.log({ event });
       this.setState({ status: DONE });
     });
+  };
+
+  renderRadio = field => {
+    const { error, touched } = field.meta;
+    const { classes, ...props } = field;
+    return (
+      <FormControl component="fieldset" className={classes}>
+        <FormLabel component="legend">{field.label}</FormLabel>
+        <RadioGroup {...props} {...field.input}>
+          {field.children}
+        </RadioGroup>
+        <p>
+          {touched ? (
+            <span style={{ color: "red" }}>{error}</span>
+          ) : (
+            <p>&nbsp;</p>
+          )}
+        </p>
+      </FormControl>
+    );
+  };
+
+  renderMultiField = field => {
+    const { error, touched } = field.meta;
+    return (
+      <TextField
+        {...field}
+        {...field.input}
+        autoComplete="off"
+        rows="4"
+        multiline
+        fullWidth
+        margin="normal"
+        variant="outlined"
+        helperText={
+          touched ? (
+            <span style={{ color: "red" }}>{error}</span>
+          ) : (
+            <p>&nbsp;</p>
+          )
+        }
+      />
+    );
   };
 
   renderField = field => {
@@ -252,6 +298,7 @@ class Form1 extends React.Component {
                         name="nim"
                         type="text"
                         label="NIM"
+                        required
                         className={classes.textField}
                         style={{ flexGrow: 1 }}
                         onChange={this.onTextChange}
@@ -304,6 +351,7 @@ class Form1 extends React.Component {
                         label="Class"
                         component={this.renderField}
                         className={classes.textField}
+                        required
                       />
                     </div>
 
@@ -314,6 +362,7 @@ class Form1 extends React.Component {
                         label="Line ID"
                         component={this.renderField}
                         className={classes.textField}
+                        required
                       />
                     </div>
 
@@ -324,6 +373,7 @@ class Form1 extends React.Component {
                         label="Phone Number"
                         component={this.renderField}
                         className={classes.textField}
+                        required
                       />
                     </div>
 
@@ -334,30 +384,34 @@ class Form1 extends React.Component {
                         label="Email"
                         component={this.renderField}
                         className={classes.textField}
+                        required
                         helperText={
                           "Either student or private email is allowed."
                         }
                       />
                     </div>
 
-                    <div>
-                      <Field
-                        name="Purpose of Joining"
-                        type="text"
-                        label="Purpose of Joining"
-                        component={this.renderField}
-                        className={classes.textField}
-                      />
-                    </div>
-
-                    <div>
+                    <br />
+                    <br />
+                    <div className={classes.radioGroup}>
                       <Field
                         name="Vegetarian/Non Vegetarian"
                         type="text"
                         label="Vegetarian/Non Vegetarian"
-                        component={this.renderField}
-                        className={classes.textField}
-                      />
+                        component={this.renderRadio}
+                        required
+                      >
+                        <FormControlLabel
+                          value="Vegetarian"
+                          control={<Radio />}
+                          label="Vegetarian"
+                        />
+                        <FormControlLabel
+                          value="Non Vegetarian"
+                          control={<Radio />}
+                          label="Non Vegetarian"
+                        />
+                      </Field>
                     </div>
 
                     <div>
@@ -367,6 +421,19 @@ class Form1 extends React.Component {
                         label="Food Alergic"
                         component={this.renderField}
                         className={classes.textField}
+                      />
+                    </div>
+
+                    <br />
+                    <Typography variant="subtitle1" style={{ color: "gray" }}>
+                      Purpose of Joining
+                    </Typography>
+                    <div>
+                      <Field
+                        name="Purpose of Joining"
+                        type="text"
+                        label="Your purpose here.."
+                        component={this.renderMultiField}
                       />
                     </div>
 

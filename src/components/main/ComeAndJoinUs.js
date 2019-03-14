@@ -149,6 +149,16 @@ class ComeAndJoinUs extends Component {
                   </p>
                 )}
               </Typography>
+              <br />
+              <Typography
+                variant="subtitle2"
+                gutterBottom
+                className={classes.subtitle}
+                style={{ color: "gray" }}
+              >
+                ({openMoment.format("D MMMM YYYY")} -{" "}
+                {closeMoment.format("D MMMM YYYY")})
+              </Typography>
             </Fade>
           </Grid>
         </Grid>
