@@ -69,7 +69,15 @@ const styles = theme => ({
   }
 });
 
-const fieldNames = ["Class", "Phone Number", "Email", "Line ID"];
+const fieldNames = [
+  "Class",
+  "Line ID",
+  "Phone Number",
+  "Email",
+  "Purpose of Joining",
+  "Vegetarian/Non Vegetarian",
+  "Food Alergic"
+];
 
 // FETCHING DATA STATUS
 const LOADING = "LOADING",
@@ -301,6 +309,16 @@ class Form1 extends React.Component {
 
                     <div>
                       <Field
+                        name="Line ID"
+                        type="text"
+                        label="Line ID"
+                        component={this.renderField}
+                        className={classes.textField}
+                      />
+                    </div>
+
+                    <div>
+                      <Field
                         name="Phone Number"
                         type="number"
                         label="Phone Number"
@@ -324,9 +342,29 @@ class Form1 extends React.Component {
 
                     <div>
                       <Field
-                        name="Line ID"
+                        name="Purpose of Joining"
                         type="text"
-                        label="Line ID"
+                        label="Purpose of Joining"
+                        component={this.renderField}
+                        className={classes.textField}
+                      />
+                    </div>
+
+                    <div>
+                      <Field
+                        name="Vegetarian/Non Vegetarian"
+                        type="text"
+                        label="Vegetarian/Non Vegetarian"
+                        component={this.renderField}
+                        className={classes.textField}
+                      />
+                    </div>
+
+                    <div>
+                      <Field
+                        name="Food Alergic"
+                        type="text"
+                        label="Food Alergic"
                         component={this.renderField}
                         className={classes.textField}
                       />

@@ -7,7 +7,7 @@ import { Grid } from "@material-ui/core";
 const styles = theme => ({
   root: {
     padding: "0.2em",
-    background: "#c23b22"
+    background: "rgb(15, 100, 160)"
   },
   title: {
     display: "flex",

@@ -8,7 +8,7 @@ import Logo from "../../res/images/kpu_logo.png";
 const styles = theme => ({
   root: {
     minHeight: "100vh",
-    background: "#ED4337",
+    background: "rgb(26, 127, 181)",
     padding: "2em 1em"
   },
   title: {
@@ -61,21 +61,20 @@ class Description extends Component {
               className={classes.title}
               style={{ display: "flex", alignItems: "center" }}
             >
-              KPU Goes to Campus
+              Leadership Development Camp 2019
             </Typography>
             <Typography
               variant="subtitle1"
               gutterBottom
               style={{ display: "flex", alignItems: "center", color: "white" }}
             >
-              Kami dari organisasi BEM UPH Kampus Medan mengadakan seminar dalam
-              rangkaian KPU Goes to Campus dengan tujuan agar para mahasiswa
-              yang termasuk kedalam pemilih pemula dapat memiliki pandangan
-              politik yang terarah dan memiliki pengetahuan tentang cara dan
-              tata pemilihan umum yang diselenggarakan di Indonesia, sehingga
-              dari diadakannya seminar ini dapat memenuhi tujuan dari pemilihan
-              umum yaitu untuk mewujudkan demokratisasi, mewujudkan hak-hak
-              rakyat, dan mewujudkan partisipasi rakyat dalam politik.
+              BEM UPH Medan Campus mengadakan acara tahunan yang berupa latihan
+              dasar kepemimpinan mahasiswa guna mempersiapkan jebolan
+              intelektualitas muda yang matang akan jiwa kepemimpinannya dalam
+              mengelolah organisasi maupun lembaga kemahasiswaan serta mampu
+              menciptakan perbedaan karakter kepemimpinan yang tidak menoton
+              demi progresifitas dan perbaikan tatanan sosial untuk mewujudkan
+              nilai-nilai integritas dalam kehidupan kampus yang demokratis.
             </Typography>
           </Grid>
         </Grid>

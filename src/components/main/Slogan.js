@@ -42,7 +42,7 @@ class Slogan extends Component {
           <Grid item sm={10}>
             <Fade bottom>
               <Typography variant="h3" gutterBottom className={classes.title}>
-                <em>" Pemilu Berdaulat, Negara Kuat "</em>
+                <em>" ROLE MODEL "</em>
               </Typography>
             </Fade>
             <br />

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Fade } from "react-reveal";
+import SlideShow from "./SlideShow";
 import TopDisplay from "./TopDisplay";
 import Description from "./Description";
 import Slogan from "./Slogan";
@@ -12,8 +13,8 @@ import ComeAndJoinUs from "./ComeAndJoinUs";
 import Competitions from "./Competitions";
 import Footer from "./Footer";
 
-import Poster from "../../res/images/poster.jpg";
-import Smokey from "../../res/images/smokey.jpg";
+import TopPoster from "../../res/images/ldc_3.jpg";
+import SloganPoster from "../../res/images/ldc_2.jpg";
 
 const styles = theme => ({
   root: {
@@ -44,7 +45,7 @@ const styles = theme => ({
 
 class MainIndex extends Component {
   state = {
-    backgroundImage: Poster,
+    backgroundImage: TopPoster,
     // showPerloader: document.readyState !== 'complete',
     showPerloader: false
   };
@@ -53,7 +54,7 @@ class MainIndex extends Component {
     super(props);
     this.topDisplayRef = React.createRef();
     this.descriptionRef = React.createRef();
-    // this.sloganRef = React.createRef();
+    this.sloganRef = React.createRef();
     this.comeAndJoinUsRef = React.createRef();
     this.competitionsRef = React.createRef();
     this.footerRef = React.createRef();
@@ -61,11 +62,11 @@ class MainIndex extends Component {
     this.backgroundBreakpoints = [
       {
         node: this.topDisplayRef,
-        backgroundImage: Poster
+        backgroundImage: TopPoster
       },
       {
         node: this.descriptionRef,
-        backgroundImage: Smokey
+        backgroundImage: SloganPoster
       }
     ];
 
@@ -113,6 +114,7 @@ class MainIndex extends Component {
           style={{ backgroundImage: `url(${this.state.backgroundImage})` }}
         />
         <div>
+          <SlideShow />
           <TopDisplay passedRef={this.topDisplayRef} />
           <Description passedRef={this.descriptionRef} />
           <Slogan passedRef={this.sloganRef} />

@@ -21,7 +21,7 @@ const styles = theme => ({
     backgroundSize: "cover"
   },
   title: {
-    color: "#ED4337",
+    color: "rgb(26, 127, 181)",
     textAlign: "center",
     marginBottom: "1em",
     fontWeight: "bold"
