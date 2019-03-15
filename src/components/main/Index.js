@@ -13,9 +13,6 @@ import ComeAndJoinUs from "./ComeAndJoinUs";
 import Competitions from "./Competitions";
 import Footer from "./Footer";
 
-import TopPoster from "../../res/images/ldc_3.jpg";
-import SloganPoster from "../../res/images/ldc_2.jpg";
-
 const styles = theme => ({
   root: {
     display: "block",
@@ -45,7 +42,7 @@ const styles = theme => ({
 
 class MainIndex extends Component {
   state = {
-    backgroundImage: TopPoster,
+    backgroundImage: "",
     // showPerloader: document.readyState !== 'complete',
     showPerloader: false
   };
@@ -62,12 +59,12 @@ class MainIndex extends Component {
     this.backgroundBreakpoints = [
       {
         node: this.topDisplayRef,
-        backgroundImage: TopPoster
-      },
-      {
-        node: this.descriptionRef,
-        backgroundImage: SloganPoster
+        backgroundImage: ""
       }
+      // {
+      //   node: this.descriptionRef,
+      //   backgroundImage: SloganPoster
+      // }
     ];
 
     _.map(this.backgroundBreakpoints, bb => bb.backgroundImage).forEach(
@@ -108,6 +105,7 @@ class MainIndex extends Component {
               <CircularProgress size={48} />
             </div>
           </div>
+          Z
         </Fade>
         <div
           className={classes.root}

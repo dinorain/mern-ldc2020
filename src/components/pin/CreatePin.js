@@ -220,8 +220,7 @@ class CreatePin extends React.Component {
                     Pin created!
                     <br />
                     <br />
-                    Please wait for our admin's approval. Further instruction
-                    has been sent your email(s).
+                    Further instruction has been sent your email(s).
                   </Typography>
                   <Typography variant="body1" align="center">
                     <CleanLink to="/main">Back to Homepage</CleanLink>

@@ -143,23 +143,27 @@ class Form1 extends React.Component {
   renderMultiField = field => {
     const { error, touched } = field.meta;
     return (
-      <TextField
-        {...field}
-        {...field.input}
-        autoComplete="off"
-        rows="4"
-        multiline
-        fullWidth
-        margin="normal"
-        variant="outlined"
-        helperText={
-          touched ? (
-            <span style={{ color: "red" }}>{error}</span>
-          ) : (
-            <p>&nbsp;</p>
-          )
-        }
-      />
+      <div>
+        <Typography variant="subtitle1" style={{ color: "gray" }}>
+          {field.label}
+        </Typography>
+        <TextField
+          {..._.omit(field, "label")}
+          {...field.input}
+          autoComplete="off"
+          rows="4"
+          multiline
+          fullWidth
+          variant="outlined"
+          helperText={
+            touched ? (
+              <span style={{ color: "red" }}>{error}</span>
+            ) : (
+              <p>&nbsp;</p>
+            )
+          }
+        />
+      </div>
     );
   };
 
@@ -418,21 +422,18 @@ class Form1 extends React.Component {
                       <Field
                         name="Food Alergic"
                         type="text"
-                        label="Food Alergic"
+                        label="Food Alergic (Optional)"
                         component={this.renderField}
                         className={classes.textField}
                       />
                     </div>
 
                     <br />
-                    <Typography variant="subtitle1" style={{ color: "gray" }}>
-                      Purpose of Joining
-                    </Typography>
                     <div>
                       <Field
                         name="Purpose of Joining"
                         type="text"
-                        label="Your purpose here.."
+                        label="Purpose of Joining (Optional)"
                         component={this.renderMultiField}
                       />
                     </div>

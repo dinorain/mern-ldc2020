@@ -9,6 +9,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
 import { Fade } from "react-reveal";
 
 import * as eventActions from "../../actions/event";
@@ -81,9 +86,10 @@ const fieldNames = [
   "Name",
   "Study Program",
   "Class",
+  "Line ID",
   "Phone Number",
   "Email",
-  "Line ID"
+  "Vegetarian/Non Vegetarian"
 ];
 
 // FETCHING DATA STATUS
@@ -112,13 +118,60 @@ class Form1Edit extends React.Component {
         return this.setState({ status: ERROR });
       }
       this.setState({
-        status: DONE,
-        imageUrl: (form.data["Payment Receipt"] || {}).secureUrl
+        status: DONE
       });
     });
   };
 
+  renderRadio = field => {
+    const { error, touched } = field.meta;
+    const { classes, ...props } = field;
+    return (
+      <FormControl component="fieldset" className={classes}>
+        <FormLabel component="legend">{field.label}</FormLabel>
+        <RadioGroup {...props} {...field.input}>
+          {field.children}
+        </RadioGroup>
+        <p>
+          {touched ? (
+            <span style={{ color: "red" }}>{error}</span>
+          ) : (
+            <p>&nbsp;</p>
+          )}
+        </p>
+      </FormControl>
+    );
+  };
+
+  renderMultiField = field => {
+    const { error, touched } = field.meta;
+    return (
+      <div>
+        <Typography variant="subtitle1" style={{ color: "gray" }}>
+          {field.label}
+        </Typography>
+        <TextField
+          {..._.omit(field, "label")}
+          {...field.input}
+          autoComplete="off"
+          rows="4"
+          multiline
+          fullWidth
+          variant="outlined"
+          helperText={
+            touched ? (
+              <span style={{ color: "red" }}>{error}</span>
+            ) : (
+              <p>&nbsp;</p>
+            )
+          }
+        />
+      </div>
+    );
+  };
+
   renderField = field => {
+    const { helperText } = field;
     const { error, touched } = field.meta;
     return (
       <TextField
@@ -129,6 +182,8 @@ class Form1Edit extends React.Component {
         helperText={
           touched ? (
             <span style={{ color: "red" }}>{error}</span>
+          ) : helperText ? (
+            helperText
           ) : (
             <p>&nbsp;</p>
           )
@@ -187,7 +242,7 @@ class Form1Edit extends React.Component {
             <Grid item sm={10}>
               <Fade bottom>
                 <Typography variant="h3" gutterBottom className={classes.title}>
-                  Eventicus
+                  Leadership Development Camp 2019
                 </Typography>
               </Fade>
               <Fade bottom>
@@ -205,7 +260,7 @@ class Form1Edit extends React.Component {
                   <form onSubmit={handleSubmit(this.onSubmit)}>
                     <Paper className={classes.paper} elevation={3}>
                       <Grid container justify="center">
-                        <Grid item xs={9} sm={6} md={3} lg={2}>
+                        <Grid item xs={9} sm={6} md={3} lg={3}>
                           <Typography
                             variant="h5"
                             align="center"
@@ -254,29 +309,7 @@ class Form1Edit extends React.Component {
                               label="Class"
                               component={this.renderField}
                               className={classes.textField}
-                            />
-                          </div>
-
-                          <div>
-                            <Field
-                              name="Phone Number"
-                              type="number"
-                              label="Phone Number"
-                              component={this.renderField}
-                              className={classes.textField}
-                            />
-                          </div>
-
-                          <div>
-                            <Field
-                              name="Email"
-                              type="email"
-                              label="Email"
-                              component={this.renderField}
-                              className={classes.textField}
-                              helperText={
-                                "Either student or private email is allowed."
-                              }
+                              required
                             />
                           </div>
 
@@ -287,6 +320,75 @@ class Form1Edit extends React.Component {
                               label="Line ID"
                               component={this.renderField}
                               className={classes.textField}
+                              required
+                            />
+                          </div>
+
+                          <div>
+                            <Field
+                              name="Phone Number"
+                              type="number"
+                              label="Phone Number"
+                              component={this.renderField}
+                              className={classes.textField}
+                              required
+                            />
+                          </div>
+
+                          <div>
+                            <Field
+                              name="Email"
+                              type="email"
+                              label="Email"
+                              component={this.renderField}
+                              className={classes.textField}
+                              required
+                              helperText={
+                                "Either student or private email is allowed."
+                              }
+                            />
+                          </div>
+
+                          <br />
+                          <br />
+                          <div className={classes.radioGroup}>
+                            <Field
+                              name="Vegetarian/Non Vegetarian"
+                              type="text"
+                              label="Vegetarian/Non Vegetarian"
+                              component={this.renderRadio}
+                              required
+                            >
+                              <FormControlLabel
+                                value="Vegetarian"
+                                control={<Radio />}
+                                label="Vegetarian"
+                              />
+                              <FormControlLabel
+                                value="Non Vegetarian"
+                                control={<Radio />}
+                                label="Non Vegetarian"
+                              />
+                            </Field>
+                          </div>
+
+                          <div>
+                            <Field
+                              name="Food Alergic"
+                              type="text"
+                              label="Food Alergic (Optional)"
+                              component={this.renderField}
+                              className={classes.textField}
+                            />
+                          </div>
+
+                          <br />
+                          <div>
+                            <Field
+                              name="Purpose of Joining"
+                              type="text"
+                              label="Purpose of Joining (Optional)"
+                              component={this.renderMultiField}
                             />
                           </div>
 

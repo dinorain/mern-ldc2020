@@ -9,16 +9,12 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
 import Divider from "@material-ui/core/Divider";
 import { Fade } from "react-reveal";
 
 import * as eventActions from "../../actions/event";
 import * as formActions from "../../actions/form";
 import * as snackbarActions from "../../actions/snackbar";
-import CleanLink from "../misc/CleanLink";
 import PinLoginDialog from "./PinLoginDialog";
 
 const styles = theme => ({

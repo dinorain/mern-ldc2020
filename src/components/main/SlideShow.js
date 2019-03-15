@@ -3,12 +3,6 @@ import React, { Component } from "react";
 import { Fade } from "react-slideshow-image";
 import { withStyles } from "@material-ui/core/styles";
 
-import LDC1 from "../../res/images/ldc_1.jpg";
-import LDC2 from "../../res/images/ldc_2.jpg";
-import LDC3 from "../../res/images/ldc_3.jpg";
-import LDC4 from "../../res/images/ldc_4.jpg";
-import LDC5 from "../../res/images/ldc_5.jpg";
-
 const styles = theme => ({
   root: {
     display: "block",
@@ -21,7 +15,9 @@ const styles = theme => ({
   }
 });
 
-const slideImages = [LDC3, LDC1, LDC2, LDC4, LDC5];
+const slideImages = [...Array(15).keys()].map((_, index) =>
+  require(`../../res/images/ldcs/${index + 1}.jpg`)
+);
 
 const properties = {
   duration: 2000,

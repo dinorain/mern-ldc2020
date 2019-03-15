@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
-import Logo from "../../res/images/ldc_logo.png";
+import Logo from "../../res/images/logos/ldc_logo_3.png";
 
 const styles = theme => ({
   root: {
@@ -32,7 +32,7 @@ const styles = theme => ({
     margin: "0.75em 0"
   },
   logo: {
-    height: "15em",
+    height: "18em",
     mozDropShadow: "(4px 4px 7px 5px rgba(0, 0, 0, 0.3))",
     webkitDropShadow: "(4px 4px 7px 5px rgba(0, 0, 0, 0.3))",
     dropShadow: "(4px 4px 7px 5px rgba(0, 0, 0, 0.3))"
@@ -51,7 +51,7 @@ class Description extends Component {
           alignItems="center"
           className={classes.root}
         >
-          <Grid item sm={12} md={6} style={{ textAlign: "center" }}>
+          <Grid item sm={12} md={4} style={{ textAlign: "center" }}>
             <img src={Logo} alt="" className={classes.logo} />
           </Grid>
           <Grid item sm={12} md={6} style={{ padding: "1.5em" }}>
@@ -68,11 +68,11 @@ class Description extends Component {
               gutterBottom
               style={{ display: "flex", alignItems: "center", color: "white" }}
             >
-              BEM UPH Medan Campus mengadakan acara tahunan yang berupa latihan
-              dasar kepemimpinan mahasiswa guna mempersiapkan jebolan
+              BEM UPH Medan Campus mengadakan acara tahunan yang berupa Latihan
+              Dasar Kepemimpinan (LDK) mahasiswa/i guna mempersiapkan jebolan
               intelektualitas muda yang matang akan jiwa kepemimpinannya dalam
               mengelolah organisasi maupun lembaga kemahasiswaan serta mampu
-              menciptakan perbedaan karakter kepemimpinan yang tidak menoton
+              menciptakan perbedaan karakter kepemimpinan yang tidak monoton
               demi progresifitas dan perbaikan tatanan sosial untuk mewujudkan
               nilai-nilai integritas dalam kehidupan kampus yang demokratis.
             </Typography>

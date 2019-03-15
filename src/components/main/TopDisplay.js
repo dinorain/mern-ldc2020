@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Logo from "../../res/images/ldc_logo.png";
+import Logo from "../../res/images/logos/ldc_logo_3.png";
 
 const styles = theme => ({
   root: {
@@ -32,15 +32,11 @@ class TopDisplay extends Component {
       <div ref={passedRef}>
         <div className={classes.root}>
           <Grid container justify="center" alignItems="center">
-            <Grid item xs={6} sm={3} md={2} lg={2}>
+            <Grid item xs={6} sm={3} md={2} lg={2} style={{ margin: "1.5em" }}>
               <img alt="" src={Logo} style={{ width: "100%" }} />
             </Grid>
             <Grid item xs={8} sm={6} md={2} lg={3}>
-              <Typography
-                variant="h3"
-                className={classes.title}
-                style={{ marginLeft: "0.5em" }}
-              >
+              <Typography variant="h3" className={classes.title}>
                 Leadership
                 <br />
                 Development
