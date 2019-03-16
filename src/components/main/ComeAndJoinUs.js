@@ -111,7 +111,7 @@ class ComeAndJoinUs extends Component {
             </LightSpeed>
             <Fade>
               <Typography
-                variant="h2"
+                variant="h3"
                 gutterBottom
                 className={classes.subtitle}
               >
