@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { compose } from "redux";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import { Grid, Divider, Hidden } from "@material-ui/core";
+import { Hidden, Divider } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
     padding: "0.2em",
-    // background: "rgb(15, 100, 160)"
-    background: "white"
+    background: "white",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "stretch"
   },
   title: {
     color: "black"
@@ -22,9 +24,10 @@ const styles = theme => ({
     margin: "0 0.35em"
   },
   divider: {
-    width: 2,
+    color: "gray",
+    width: 1.5,
     height: "3.5em",
-    margin: "0 0.5em"
+    margin: "0 0.75em"
   }
 });
 
@@ -34,13 +37,8 @@ class Footer extends Component {
 
     return (
       <div ref={passedRef}>
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          className={classes.root}
-        >
-          <Grid item xs={10} sm={1} md={1} lg={1}>
+        <div className={classes.root}>
+          <div>
             <Typography variant="body2" className={classes.title}>
               Organized by:
             </Typography>
@@ -51,28 +49,15 @@ class Footer extends Component {
                 className={classes.logo}
               />
             </div>
-          </Grid>
-          <Hidden xsDown>
-            <Grid
-              item
-              sm={1}
-              md={1}
-              lg={1}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
-              }}
-            >
-              <Divider className={classes.divider} />
-            </Grid>
+          </div>
+          <Hidden smDown>
+            <Divider className={classes.divider} />
           </Hidden>
           <Hidden smUp>
-            <Grid item xs={10} sm={10} md={10} lg={10}>
-              <Divider style={{ margin: "0.65em 0" }} />
-            </Grid>
+            <br />
+            <br />
           </Hidden>
-          <Grid item xs={10} sm={6} md={7} lg={6}>
+          <div>
             <Typography variant="body2" className={classes.title}>
               Supported by:
             </Typography>
@@ -93,8 +78,8 @@ class Footer extends Component {
                 />
               ))}
             </div>
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </div>
     );
   }
