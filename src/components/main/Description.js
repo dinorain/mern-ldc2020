@@ -8,7 +8,7 @@ import Logo from "../../res/images/logos/ldc_logo_3.png";
 const styles = theme => ({
   root: {
     minHeight: "100vh",
-    background: "rgb(26, 127, 181)",
+    background: "rgb(6, 124, 108)",
     padding: "2em 1em"
   },
   title: {
@@ -16,7 +16,7 @@ const styles = theme => ({
     fontWeight: "600",
     fontFamily:
       "MyriadPro-Regular, 'Myriad Pro Regular', MyriadPro, 'Myriad Pro', Helvetica, Arial, sans-serif",
-    textShadow: "4px 4px 7px rgba(0, 0, 0, 0.1)"
+    textShadow: "4px 4px 8px rgba(0, 0, 0, 0.2)"
   },
   subtitle: {
     color: "white",
@@ -59,7 +59,11 @@ class Description extends Component {
               variant="h4"
               gutterBottom
               className={classes.title}
-              style={{ display: "flex", alignItems: "center" }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                color: "rgb(248, 147, 31)"
+              }}
             >
               Leadership Development Camp 2019
             </Typography>
@@ -70,7 +74,7 @@ class Description extends Component {
             >
               BEM UPH Medan Campus mengadakan acara tahunan yang berupa Latihan
               Dasar Kepemimpinan (LDK) mahasiswa/i guna mempersiapkan jebolan
-              intelektualitas muda yang matang akan jiwa kepemimpinannya dalam
+              intelektual muda yang matang akan jiwa kepemimpinannya dalam
               mengelolah organisasi maupun lembaga kemahasiswaan serta mampu
               menciptakan perbedaan karakter kepemimpinan yang tidak monoton
               demi progresifitas dan perbaikan tatanan sosial untuk mewujudkan

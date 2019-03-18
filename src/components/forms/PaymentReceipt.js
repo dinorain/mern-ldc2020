@@ -26,7 +26,7 @@ const styles = theme => ({
     width: "100vw",
     height: "100vh",
     zIndex: "-10",
-    backgroundColor: "rgb(26, 127, 181)",
+    backgroundColor: "rgb(6, 124, 108)",
     // backgroundImage: `url(${Smokey})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -34,16 +34,6 @@ const styles = theme => ({
   },
   topDisplay: {
     minHeight: "100vh"
-  },
-  title: {
-    textAlign: "center",
-    color: "white",
-    fontWeight: "bold"
-  },
-  subtitle: {
-    color: "white",
-    textAlign: "center",
-    marginTop: "1.5em"
   },
   paper: {
     padding: "2em",
@@ -197,12 +187,21 @@ class PaymentReceipt extends React.Component {
           >
             <Grid item sm={10}>
               <Fade bottom>
-                <Typography variant="h3" gutterBottom className={classes.title}>
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  align="center"
+                  style={{ color: "white", fontWeight: "bold" }}
+                >
                   Leadership Development Camp 2019
                 </Typography>
               </Fade>
               <Fade bottom>
-                <Typography variant="subtitle1" className={classes.subtitle}>
+                <Typography
+                  variant="subtitle1"
+                  align="center"
+                  style={{ color: "white" }}
+                >
                   - Payment Receipt -
                 </Typography>
               </Fade>
@@ -296,7 +295,7 @@ class PaymentReceipt extends React.Component {
                         variant="subtitle2"
                         className={classes.filename}
                       >
-                        Only *.jpeg, *.jpg, or *.png is allowed (max. 9MB).
+                        Only *.jpeg, *.jpg, or *.png allowed (max. 9MB).
                       </Typography>
                     </div>
                   </Paper>

@@ -11,7 +11,7 @@ import Form1 from "../forms/Form1";
 const styles = theme => ({
   root: {
     minHeight: "100vh",
-    background: "rgb(26, 127, 181)",
+    background: "rgb(6, 124, 108)",
     padding: "3.5em 1em"
   },
   title: {

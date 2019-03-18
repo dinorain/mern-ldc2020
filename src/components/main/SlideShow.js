@@ -39,7 +39,7 @@ class Slideshow extends Component {
             <div key="index" className="each-slide">
               <div
                 style={{
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url(${slideImage})`
+                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${slideImage})`
                 }}
               />
             </div>

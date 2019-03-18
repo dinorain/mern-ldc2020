@@ -13,7 +13,7 @@ const styles = theme => ({
   },
   title: {
     textAlign: "center",
-    color: "rgb(26, 147, 201)",
+    color: "rgb(248, 147, 31)",
     fontWeight: "bold",
     textShadow: "4px 4px 7px rgba(0, 0, 0, 0.15)"
   },

@@ -35,7 +35,7 @@ const styles = theme => ({
     width: "100vw",
     height: "100vh",
     zIndex: "-10",
-    backgroundColor: "rgb(26, 127, 181)",
+    backgroundColor: "rgb(6, 124, 108)",
     // backgroundImage: `url(${Smokey})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -124,9 +124,9 @@ class Form1 extends React.Component {
     const { error, touched } = field.meta;
     const { classes, ...props } = field;
     return (
-      <FormControl component="fieldset" className={classes}>
+      <FormControl component="fieldset" className={classes} required>
         <FormLabel component="legend">{field.label}</FormLabel>
-        <RadioGroup {...props} {...field.input}>
+        <RadioGroup {...props} {...field.input} required>
           {field.children}
         </RadioGroup>
         <p>
@@ -428,6 +428,16 @@ class Form1 extends React.Component {
                       />
                     </div>
 
+                    <div>
+                      <Field
+                        name="Chronic Disease"
+                        type="text"
+                        label="Chronic Disease (Optional)"
+                        component={this.renderField}
+                        className={classes.textField}
+                      />
+                    </div>
+
                     <br />
                     <div>
                       <Field
@@ -458,6 +468,15 @@ class Form1 extends React.Component {
                 )}
               </Grid>
             </Grid>
+            <Typography
+              variant="body2"
+              align="center"
+              gutterBottom
+              style={{ color: "rgb(160, 160, 160)", marginTop: "2em" }}
+            >
+              If you encounter any issues, please feel free to contact us at BEM
+              UPHMC Official Line Account @bemuphmedan.
+            </Typography>
           </Paper>
         </form>
       </div>

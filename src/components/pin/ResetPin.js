@@ -36,7 +36,7 @@ const styles = theme => ({
   wallpaper: {
     height: "100vh",
     background: "orange",
-    backgroundColor: "rgb(26, 127, 181)",
+    backgroundColor: "rgb(6, 124, 108)",
     // backgroundImage: `url(${Smokey})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
