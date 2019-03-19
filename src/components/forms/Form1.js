@@ -472,7 +472,7 @@ class Form1 extends React.Component {
               variant="body2"
               align="center"
               gutterBottom
-              style={{ color: "rgb(160, 160, 160)", marginTop: "2em" }}
+              style={{ color: "black", marginTop: "2em", fontWeight: "bold" }}
             >
               If you encounter any issues, please feel free to contact us at BEM
               UPHMC Official Line Account @bemuphmedan.
