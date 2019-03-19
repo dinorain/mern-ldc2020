@@ -249,7 +249,7 @@ class PaymentReceipt extends React.Component {
                         : ""}
                     </Typography>
 
-                    {uploadedOnce && (
+                    {Boolean(uploadedOnce && imageUrl) && (
                       <Button
                         type="submit"
                         color="primary"
@@ -264,7 +264,11 @@ class PaymentReceipt extends React.Component {
                     <br />
                     <br />
                     <Button
-                      variant={uploadedOnce ? "outlined" : "contained"}
+                      variant={
+                        Boolean(uploadedOnce && imageUrl)
+                          ? "outlined"
+                          : "contained"
+                      }
                       color="primary"
                       disabled={
                         uploadStatus === LOADING ||
@@ -273,7 +277,9 @@ class PaymentReceipt extends React.Component {
                       }
                       onClick={e => console.log(this.refs.upload.click())}
                     >
-                      {uploadedOnce ? "Upload again..." : "Upload..."}
+                      {Boolean(uploadedOnce && imageUrl)
+                        ? "Upload again..."
+                        : "Upload..."}
                     </Button>
 
                     <div>

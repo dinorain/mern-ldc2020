@@ -288,9 +288,9 @@ class Form1 extends React.Component {
                     <Typography
                       variant="h5"
                       align="center"
-                      style={{ margin: "1.25em 0" }}
+                      style={{ margin: "1.25em 0", color: "rgb(6, 124, 108)" }}
                     >
-                      Please fill in the form.
+                      Please fill in the form
                     </Typography>
                     <div
                       style={{

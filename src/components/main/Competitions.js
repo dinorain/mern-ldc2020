@@ -17,12 +17,13 @@ const styles = theme => ({
   title: {
     display: "inline",
     textAlign: "center",
-    color: "white",
+    color: "rgb(248, 147, 31)",
     fontFamily: "'Proxima Nova', Helvetica, Arial, sans-serif",
     fontWeight: "600",
     marginBottom: "1em",
     padding: "0 0.65em 0.5em 0.65em",
-    borderBottom: "2px solid white"
+    borderBottom: "2px solid rgb(248, 147, 31)",
+    textShadow: "4px 4px 7px rgba(0, 0, 0, 0.1)"
   },
   bigImage: {
     color: "white",
