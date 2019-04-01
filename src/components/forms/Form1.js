@@ -79,7 +79,8 @@ const fieldNames = [
   "Line ID",
   "Phone Number",
   "Email",
-  "Vegetarian/Non Vegetarian"
+  "Vegetarian/Non Vegetarian",
+  "Personality Test Result"
 ];
 
 // FETCHING DATA STATUS
@@ -274,7 +275,7 @@ class Form1 extends React.Component {
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <Paper className={classes.paper} elevation={3}>
             <Grid container justify="center">
-              <Grid item xs={9} sm={6} md={3} lg={3}>
+              <Grid item xs={10} sm={6} md={4} lg={4}>
                 {event.forms.length >= event.formCategories[0].seatCount ? (
                   <Typography
                     variant="h5"
@@ -438,6 +439,30 @@ class Form1 extends React.Component {
                       />
                     </div>
 
+                    <div>
+                      <Field
+                        name="Personality Test Result"
+                        type="text"
+                        label="Personality Test Result (Ex: ENFJ)"
+                        component={this.renderField}
+                        className={classes.textField}
+                        required
+                      />
+                      <Typography variant="body2" style={{ color: "#9C9C9C" }}>
+                        <p>
+                          Take the test{" "}
+                          <a
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            href="https://www.16personalities.com/free-personality-test"
+                          >
+                            here
+                          </a>
+                        </p>
+                      </Typography>
+                    </div>
+
+                    <br />
                     <br />
                     <div>
                       <Field
