@@ -55,7 +55,7 @@ const styles = theme => ({
     marginTop: "1.5em"
   },
   paper: {
-    padding: "2em",
+    padding: "2em 1em",
     margin: "2em 0"
   },
   formGrid: {
