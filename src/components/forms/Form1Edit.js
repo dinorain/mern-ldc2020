@@ -258,7 +258,7 @@ class Form1Edit extends React.Component {
                   <form onSubmit={handleSubmit(this.onSubmit)}>
                     <Paper className={classes.paper} elevation={3}>
                       <Grid container justify="center">
-                        <Grid item xs={10} sm={6} md={4} lg={4}>
+                        <Grid item xs={11} sm={6} md={4} lg={4}>
                           <Typography
                             variant="h5"
                             align="center"

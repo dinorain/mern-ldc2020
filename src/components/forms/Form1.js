@@ -275,7 +275,7 @@ class Form1 extends React.Component {
         <form onSubmit={handleSubmit(this.onSubmit)}>
           <Paper className={classes.paper} elevation={3}>
             <Grid container justify="center">
-              <Grid item xs={10} sm={6} md={4} lg={4}>
+              <Grid item xs={11} sm={6} md={4} lg={4}>
                 {event.forms.length >= event.formCategories[0].seatCount ? (
                   <Typography
                     variant="h5"
