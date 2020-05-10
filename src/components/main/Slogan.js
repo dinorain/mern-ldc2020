@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import { People as PeopleIcon, Money as MoneyIcon } from "@material-ui/icons";
+import { Money as MoneyIcon } from "@material-ui/icons";
 
 import { Fade } from "react-reveal";
 
@@ -44,7 +44,7 @@ class Slogan extends Component {
     const price = _.get(
       event,
       ["formCategories", "0", "priceRanges", "0", "price"],
-      "..."
+      500000
     );
 
     return (
@@ -80,11 +80,11 @@ class Slogan extends Component {
               <Typography variant="subtitle1" className={classes.subtitle}>
                 <MoneyIcon style={{ fontWeight: "bold", fontSize: "1.1em" }} />
                 &nbsp;&nbsp; Rp.{" "}
-                {price === "..." ? price : price.toLocaleString("de-DE")}
+                {price === "..." ? price : price.toLocaleString("de-DE")}{",-"}
               </Typography>
               <Typography variant="subtitle1" className={classes.subtitle}>
-                <PeopleIcon style={{ fontWeight: "bold", fontSize: "1.1em" }} />
-                &nbsp;&nbsp; Only 100 slots
+                {/* <PeopleIcon style={{ fontWeight: "bold", fontSize: "1.1em" }} />
+                &nbsp;&nbsp; Only 100 slots */}
               </Typography>
             </Fade>
           </Grid>

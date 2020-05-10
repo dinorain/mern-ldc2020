@@ -11,11 +11,13 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import MenuItem from '@material-ui/core/MenuItem';
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import MuiPhoneNumber from "material-ui-phone-number";
 import {
   Close as CloseIcon,
   Done as DoneIcon,
@@ -71,16 +73,23 @@ const styles = theme => ({
   submitInfo: {
     marginBottom: "1.5em",
     color: "red"
+  },
+  formcontrol: {
+    margin: "1.25em"
   }
 });
 
 const fieldNames = [
   "Class",
-  "Line ID",
+  "Gender",
+  "LINE ID",
   "Phone Number",
-  "Email",
+  "Student Email",
+  "Birthdate",
+  "Parent/Gurdian",
   "Vegetarian/Non Vegetarian",
-  "Personality Test Result"
+  "Fasting/Not Fasting",
+  "MBTI Personality Test Result"
 ];
 
 // FETCHING DATA STATUS
@@ -100,6 +109,19 @@ class Form1 extends React.Component {
     nim: "",
     name: "",
     studyProgram: "",
+    email: "",
+    phoneNumber: "",
+    phoneNumber2: "",
+    lineId: "",
+    gender: "",
+    birthdate: "",
+    parentGuardian: "",
+    vegetarian: "",
+    fasting: "",
+    foodAllergy: "",
+    chronicDisease: "",
+    personality: "",
+    purpose: "",
     submitInfo: " ",
     checkingStatus: null
   };
@@ -116,7 +138,6 @@ class Form1 extends React.Component {
         console.log({ error });
         return this.setState({ status: ERROR });
       }
-      console.log({ event });
       this.setState({ status: DONE });
     });
   };
@@ -190,12 +211,33 @@ class Form1 extends React.Component {
     );
   };
 
+  renderField2 = field => {
+    const { helperText } = field;
+    const { error, touched } = field.meta;
+    return (
+      <TextField
+        {...field.input}
+        {...field}
+        autoComplete="off"
+        helperText={
+          touched ? (
+            <span style={{ color: "red" }}>{error}</span>
+          ) : helperText ? (
+            helperText
+          ) : (
+            <p>&nbsp;</p>
+          )
+        }
+      />
+    );
+  };
+
   verifyEmailAvailbility = _.debounce(async () => {
     const nim = this.state.nim.trim();
     if (!nim)
       return this.setState({
         checkingStatus: UNAVAILABLE,
-        submitInfo: "Please provde your NIM!"
+        submitInfo: "Please provide your NIM!"
       });
     try {
       this.setState({ checkingStatus: CHECKING, submitInfo: " " });
@@ -229,6 +271,30 @@ class Form1 extends React.Component {
     this.verifyEmailAvailbility();
   };
 
+  onPersonalityChange = e => {
+    this.setState({ personality: e.target.value });
+  };
+
+  onBirthdateChange = e => {
+    this.setState({ birthdate: e.target.value });
+  };
+
+  onGenderChange = e => {
+    this.setState({ gender: e.target.value });
+  };
+
+  onPhoneNumberChange = e => {
+    this.setState({ phoneNumber: e });
+  };
+
+  onPhoneNumber2Change = e => {
+    this.setState({ phoneNumber2: e });
+  };
+
+  onParentGuardianChange = e => {
+    this.setState({ parentGuardian: e.target.value });
+  };
+
   onSubmit = formProps => {
     const eventId = process.env.REACT_APP_EVENT_ID;
     const formCategoryId = process.env.REACT_APP_FORM_CATEGORY_ID_1;
@@ -243,9 +309,21 @@ class Form1 extends React.Component {
       uid: `${formCategoryId}#${this.state.nim}`,
       name: `${this.state.name} (${this.state.nim})`,
       recipientEmails: [formProps["Email"].toLowerCase()],
-      NIM: this.state.nim,
-      Name: this.state.name,
+      "NIM": this.state.nim,
+      "Name": this.state.name,
       "Study Program": this.state.studyProgram,
+      "Class": formProps["Email"],
+      "Gender": this.state.gender,
+      "LINE ID": formProps["LINE ID"],
+      "Phone Number": this.state.phoneNumber,
+      "Birthdate": this.state.birthdate,
+      "Parent/Guardian": `${this.state.phoneNumber2} - ${formProps["NameOfParent/Guardian"]} - ${this.state.parentGuardian}`,
+      "Vegetarian": formProps["Vegetarian/Non Vegetarian"],
+      "Fasting": formProps["Fasting/Not Fasting"],
+      "Food Allergy": formProps["Food Allergy"],
+      "Chronic Disease": formProps["Chronic Disease"],
+      "MBTI": this.state.personality,
+      "Purpose of Joining": formProps["Purpose of Joining"],
       ...formProps
     };
     const formData = new FormData();
@@ -276,20 +354,11 @@ class Form1 extends React.Component {
           <Paper className={classes.paper} elevation={3}>
             <Grid container justify="center">
               <Grid item xs={11} sm={6} md={4} lg={4}>
-                {event.forms.length >= event.formCategories[0].seatCount ? (
-                  <Typography
-                    variant="h5"
-                    align="center"
-                    style={{ margin: "1.25em 0" }}
-                  >
-                    Sorry, the registration is already full.
-                  </Typography>
-                ) : (
-                  <Fragment>
+              <Fragment>
                     <Typography
                       variant="h5"
                       align="center"
-                      style={{ margin: "1.25em 0", color: "rgb(6, 124, 108)" }}
+                      style={{ margin: "1.25em 0", color: "rgb(0, 0, 0)" }}
                     >
                       Please fill in the form
                     </Typography>
@@ -300,7 +369,7 @@ class Form1 extends React.Component {
                       }}
                     >
                       <TextField
-                        name="nim"
+                        name="NIM"
                         type="text"
                         label="NIM"
                         required
@@ -323,7 +392,7 @@ class Form1 extends React.Component {
 
                     <div>
                       <TextField
-                        name="name"
+                        name="Name"
                         type="text"
                         label="Name"
                         value={this.state.name}
@@ -337,7 +406,7 @@ class Form1 extends React.Component {
 
                     <div>
                       <TextField
-                        name="studyProgram"
+                        name="Study Program"
                         type="text"
                         label="Study Program"
                         value={this.state.studyProgram}
@@ -354,17 +423,38 @@ class Form1 extends React.Component {
                         name="Class"
                         type="text"
                         label="Class"
+                        style={{ marginBottom: "1.5em" }}
                         component={this.renderField}
                         className={classes.textField}
+                        value={this.state.class} 
                         required
+                        helperText="e.g: 18M3"
                       />
                     </div>
 
                     <div>
+                    <TextField 
+                        name="Gender" 
+                        fullWidth 
+                        select 
+                        label="Gender"
+                        value={this.state.gender} 
+                        className={classes.textField}
+                        style={{ flexGrow: 1, marginBottom: "1.5em" }}
+                        onChange={this.onGenderChange}
+                        required
+                      >
+                        <MenuItem value="Male">Male</MenuItem>
+                        <MenuItem value="Female">Female</MenuItem>
+                      </TextField>
+                    </div>
+
+                    <div>
                       <Field
-                        name="Line ID"
+                        name="LINE ID"
                         type="text"
-                        label="Line ID"
+                        label="LINE ID"
+                        value={this.state.lineId} 
                         component={this.renderField}
                         className={classes.textField}
                         required
@@ -372,13 +462,17 @@ class Form1 extends React.Component {
                     </div>
 
                     <div>
-                      <Field
+                      <MuiPhoneNumber
                         name="Phone Number"
-                        type="number"
                         label="Phone Number"
-                        component={this.renderField}
-                        className={classes.textField}
+                        defaultCountry={'id'}
+                        onlyCountry={'id'}
+                        countryCodeEditable={false}
+                        disableDropdown={true}
+                        fullWidth
+                        style={{ margin: "1.5em 0" }}
                         required
+                        onChange={this.onPhoneNumberChange}
                       />
                     </div>
 
@@ -386,24 +480,88 @@ class Form1 extends React.Component {
                       <Field
                         name="Email"
                         type="email"
-                        label="Email"
+                        label="Student Email"
+                        style={{ marginBottom: "1.5em" }}
                         component={this.renderField}
                         className={classes.textField}
+                        value={this.state.email} 
                         required
-                        helperText={
-                          "Either student or private email is allowed."
-                        }
+                        
                       />
                     </div>
 
-                    <br />
-                    <br />
+                    <div>
+                      <TextField
+                        name="Birthdate"
+                        label="Birthdate"
+                        type="date"
+                        fullWidth
+                        style={{ marginBottom: "1.5em" }}
+                        className={classes.textField}
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onChange={this.onBirthdateChange}
+                        required
+                      />
+                    </div>
+                    
+
+                    <fieldset style={{ padding: "0 1em", margin: "1.5em 0 3em 0" }}>
+                      <legend style={{ padding: "0 0.5em", color:"grey" }}>Parent/Guardian</legend>
+                      <div>
+                        <div className="d-flex">
+
+                        <div className={classes.textField}>
+                            <TextField
+                              name="Parent/Guardian" 
+                              label="Parent/Guardian"
+                              fullWidth
+                              select 
+                              className={classes.textField}
+                              style={{ flexGrow: 1, marginBottom: "1em" }}
+                              value={this.state.parentGuardian} 
+                              onChange={this.onParentGuardianChange}
+                              required
+                            >
+                              <MenuItem name="Parent/Guardian" value="Parent">Parent</MenuItem>
+                              <MenuItem name="Parent/Guardian" value="Guardian">Guardian</MenuItem>
+                            </TextField>
+                          </div>
+
+                          <Field
+                            name="NameOfParent/Guardian"
+                            type="text"
+                            label="Name"
+                            component={this.renderField}
+                            className={classes.textField}
+                            required
+                          />
+
+                          <MuiPhoneNumber
+                            name="PhoneNumberOfParent/Guardian"
+                            label="Phone Number"
+                            defaultCountry={'id'}
+                            onlyCountry={'id'}
+                            countryCodeEditable={false}
+                            disableDropdown={true}
+                            fullWidth
+                            style={{ margin: "1.5em 0" }}
+                            required
+                            onChange={this.onPhoneNumber2Change}
+                          />
+                        </div>
+                      </div>
+                    </fieldset>
+
                     <div className={classes.radioGroup}>
                       <Field
                         name="Vegetarian/Non Vegetarian"
                         type="text"
                         label="Vegetarian/Non Vegetarian"
                         component={this.renderRadio}
+                        style={{ marginBottom: "1.5em" }}
+                        value={this.state.vegetarian} 
                         required
                       >
                         <FormControlLabel
@@ -419,13 +577,36 @@ class Form1 extends React.Component {
                       </Field>
                     </div>
 
+                    <div className={classes.radioGroup}>
+                      <Field
+                        name="Fasting/Not Fasting"
+                        type="text"
+                        label="Fasting/Not Fasting (Puasa/Tidak)"
+                        component={this.renderRadio}
+                        value={this.state.fasting} 
+                        required
+                      >
+                        <FormControlLabel
+                          value="Fasting"
+                          control={<Radio />}
+                          label="Fasting (Puasa)"
+                        />
+                        <FormControlLabel
+                          value="Not Fasting"
+                          control={<Radio />}
+                          label="Not Fasting (Tidak Puasa)"
+                        />
+                      </Field>
+                    </div>
+
                     <div>
                       <Field
-                        name="Food Alergic"
+                        name="Food Allergy"
                         type="text"
-                        label="Food Alergic (Optional)"
+                        label="Food Allergy (Optional)"
                         component={this.renderField}
                         className={classes.textField}
+                        value={this.state.foodAllergy} 
                       />
                     </div>
 
@@ -436,21 +617,43 @@ class Form1 extends React.Component {
                         label="Chronic Disease (Optional)"
                         component={this.renderField}
                         className={classes.textField}
+                        value={this.state.chronicDisease} 
                       />
                     </div>
 
                     <div>
-                      <Field
-                        name="Personality Test Result"
-                        type="text"
-                        label="Personality Test Result (Ex: ENFJ)"
-                        component={this.renderField}
+                      <TextField 
+                        name="MBTI" 
+                        fullWidth 
+                        select 
+                        label="MBTI Personality Test Result"
+                        value={this.state.personality} 
                         className={classes.textField}
+                        style={{ flexGrow: 1 }}
+                        onChange={this.onPersonalityChange}
                         required
-                      />
-                      <Typography variant="body2" style={{ color: "#9C9C9C" }}>
+                      >
+                        <MenuItem value="INTJ">INTJ</MenuItem>
+                        <MenuItem value="INTP">INTP</MenuItem>
+                        <MenuItem value="ENTJ">ENTJ</MenuItem>
+                        <MenuItem value="ENTP">ENTP</MenuItem>
+                        <MenuItem value="INFJ">INFJ</MenuItem>
+                        <MenuItem value="INFP">INFP</MenuItem>
+                        <MenuItem value="ENFJ">ENFJ</MenuItem>
+                        <MenuItem value="ENFP">ENFP</MenuItem>
+                        <MenuItem value="ISTJ">ISTJ</MenuItem>
+                        <MenuItem value="ISFJ">ISFJ</MenuItem>
+                        <MenuItem value="ESTJ">ESTJ</MenuItem>
+                        <MenuItem value="ESFJ">ESFJ</MenuItem>
+                        <MenuItem value="ISTP">ISTP</MenuItem>
+                        <MenuItem value="ISFP">ISFP</MenuItem>
+                        <MenuItem value="ESTP">ESTP</MenuItem>
+                        <MenuItem value="ESFP">ESFP</MenuItem>
+                      </TextField>
+
+                      <Typography variant="body2" style={{ color: "#9C9C9C", marginBottom: "1.5em" }}>
                         <p>
-                          Take the test{" "}
+                          Take a MBTI personality test{" "}
                           <a
                             target="_blank"
                             rel="noopener noreferrer"
@@ -461,8 +664,7 @@ class Form1 extends React.Component {
                         </p>
                       </Typography>
                     </div>
-
-                    <br />
+                    
                     <br />
                     <div>
                       <Field
@@ -490,7 +692,6 @@ class Form1 extends React.Component {
                       )}
                     </Button>
                   </Fragment>
-                )}
               </Grid>
             </Grid>
             <Typography
@@ -535,7 +736,8 @@ function validate(values, props) {
 
   const emailTest = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value);
-  if (emailTest(values.Email)) errors.Email = "Invalid email address!";
+    // value && !/^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(student.uph.edu)$/i.test(value);
+  if (emailTest(values.Email)) errors.Email = "Invalid student email address!";
 
   return errors;
 }

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Logo from "../../res/images/logos/ldc_logo_3.png";
+import Logo from "../../res/images/logos/LDC_LOGO_landscape.png";
 
 const styles = theme => ({
   root: {
@@ -32,18 +32,18 @@ class TopDisplay extends Component {
       <div ref={passedRef}>
         <div className={classes.root}>
           <Grid container justify="center" alignItems="center">
-            <Grid item xs={6} sm={3} md={2} lg={2} style={{ margin: "1.5em" }}>
-              <img alt="" src={Logo} style={{ width: "100%" }} />
+            <Grid item xs={0} sm={0} md={6} lg={6} style={{ margin: "1.5em" }}>
+              <img alt="LDC_2020" src={Logo} style={{ width: "100%" }} />
             </Grid>
-            <Grid item xs={8} sm={6} md={2} lg={3}>
+            {/* <Grid item xs={8} sm={6} md={2} lg={3}>
               <Typography variant="h3" className={classes.title}>
                 Leadership
                 <br />
                 Development
                 <br />
-                Camp 2019
+                Camp 2020
               </Typography>
-            </Grid>
+            </Grid> */}
           </Grid>
         </div>
       </div>

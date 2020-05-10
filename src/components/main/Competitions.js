@@ -11,7 +11,7 @@ import Form1 from "../forms/Form1";
 const styles = theme => ({
   root: {
     minHeight: "100vh",
-    background: "rgb(6, 124, 108)",
+    background: "rgb(0, 0, 0)",
     padding: "3.5em 1em"
   },
   title: {
@@ -74,7 +74,7 @@ const styles = theme => ({
   }
 });
 
-class Description extends Component {
+class Competitions extends Component {
   render() {
     const { classes, passedRef } = this.props;
 
@@ -105,4 +105,4 @@ class Description extends Component {
   }
 }
 
-export default compose(withStyles(styles))(Description);
+export default compose(withStyles(styles))(Competitions);

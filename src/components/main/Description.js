@@ -3,12 +3,12 @@ import { compose } from "redux";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
-import Logo from "../../res/images/logos/ldc_logo_3.png";
+import Logo from "../../res/images/logos/LDC_LOGO_2020_gradient.png";
 
 const styles = theme => ({
   root: {
     minHeight: "100vh",
-    background: "rgb(6, 124, 108)",
+    background: "rgb(0, 0, 0)",
     padding: "2em 1em"
   },
   title: {
@@ -65,20 +65,22 @@ class Description extends Component {
                 color: "rgb(248, 147, 31)"
               }}
             >
-              Leadership Development Camp 2019
+              Leadership Development Camp 2020
             </Typography>
             <Typography
               variant="subtitle1"
               gutterBottom
               style={{ display: "flex", alignItems: "center", color: "white" }}
             >
-              BEM UPH Medan Campus mengadakan acara tahunan yang berupa Latihan
-              Dasar Kepemimpinan (LDK) mahasiswa/i guna mempersiapkan jebolan
-              intelektual muda yang matang akan jiwa kepemimpinannya dalam
-              mengelolah organisasi maupun lembaga kemahasiswaan serta mampu
-              menciptakan perbedaan karakter kepemimpinan yang tidak monoton
-              demi progresifitas dan perbaikan tatanan sosial untuk mewujudkan
-              nilai-nilai integritas dalam kehidupan kampus yang demokratis.
+              Leadership Development Camp (LDC) 2020 adalah acara tahunan 
+              yang berupa Latihan Dasar Kepemimpinan (LDK) yang diselenggarakan 
+              oleh BEM-UPH 2019/2020 untuk mahasiswa/i guna mempersiapkan jebolan 
+              intelektual muda yang matang akan jiwa kepemimpinannya dalam mengelola 
+              organisasi maupun lembaga kemahasiswaan serta mampu menciptakan perbedaan 
+              karakter kepemimpinan yang tidak monoton demi progresifitas dan perbaikan 
+              tatanan sosial untuk mewujudkan nilai-nilai integritas dalam kehidupan kampus 
+              yang demokratis.
+
             </Typography>
           </Grid>
         </Grid>

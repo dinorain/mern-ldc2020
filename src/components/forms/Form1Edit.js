@@ -1,17 +1,26 @@
 import _ from "lodash";
+import moment from "moment";
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm, getFormValues, Field } from "redux-form";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
+
 import FormLabel from "@material-ui/core/FormLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
+import MuiPhoneNumber from "material-ui-phone-number";
+
+import Logo from "../../res/images/logos/LDC_LOGO_landscape.png";
+
+import {
+  Typography,
+  TextField,
+  Button,
+  FormControl,
+  MenuItem,
+  CircularProgress,
+} from '@material-ui/core';
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import { Fade } from "react-reveal";
@@ -31,7 +40,7 @@ const styles = theme => ({
     width: "100vw",
     height: "100vh",
     zIndex: "-10",
-    backgroundColor: "rgb(6, 124, 108)",
+    backgroundColor: "rgb(0, 0, 0)",
     // backgroundImage: `url(${Smokey})`,
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
@@ -83,11 +92,15 @@ const styles = theme => ({
 
 const fieldNames = [
   "Class",
-  "Line ID",
+  "Gender",
+  "LINE ID",
   "Phone Number",
-  "Email",
-  "Vegetarian/Non Vegetarian",
-  "Personality Test Result"
+  "Student Email",
+  "Birthdate",
+  "Parent/Guardian",
+  "Vegetarian",
+  "Fasting",
+  "MBTI Personality Test Result"
 ];
 
 // FETCHING DATA STATUS
@@ -102,7 +115,24 @@ class Form1Edit extends React.Component {
     status: LOADING,
     submitStatus: IDLE,
     pin: null,
-    PinLoginDialog: true
+    PinLoginDialog: true,
+    nim: "",
+    name: "",
+    studyProgram: "",
+    email: "",
+    phoneNumber: "",
+    phoneNumber2: "",
+    lineId: "",
+    gender: "",
+    birthdate: "",
+    parentGuardian: "",
+    vegetarian: "",
+    fasting: "",
+    foodAllergy: "",
+    chronicDisease: "",
+    personality: "",
+    personality2: "",
+    purpose: "",
   };
 
   fetchData = async pin => {
@@ -141,6 +171,33 @@ class Form1Edit extends React.Component {
     );
   };
 
+  renderMenuItem = field => {
+    const { error, touched } = field.meta;
+    const { classes, ...props } = field;
+    return (
+      <TextField 
+        fullWidth 
+        select 
+        label={field.label}
+        className={classes}
+        style={{ flexGrow: 1, marginBottom: "1.5em" }}
+        required
+        helperText={
+          touched ? (
+            <span style={{ color: "red" }}>{error}</span>
+          ) : (
+            <p>&nbsp;</p>
+          )
+        }
+      >
+        <MenuItem {...props} {...field.input} required>
+          {field.children}
+        </MenuItem>
+      </TextField>
+    );
+  };
+
+  
   renderMultiField = field => {
     const { error, touched } = field.meta;
     return (
@@ -195,19 +252,82 @@ class Form1Edit extends React.Component {
       [stateName]: open === undefined ? !Boolean(state[stateName]) : open
     }));
 
+  onPersonalityChange = e => {
+    this.setState({ personality: e.target.value });
+
+    // this.setState({ personality: e.target.value }, () => {
+    //   console.log(`Before: ${this.state.personality}`);
+    //   this.setState({ personality: this.state.personality }, () => {
+    //     console.log(`Before: ${this.state.personality}`);
+    //   });
+    // }); 
+  };
+
+  onBirthdateChange = e => {
+    this.setState({ birthdate: e.target.value });
+  };
+
+  onGenderChange = e => {
+    this.setState({ gender: e.target.value });
+  };
+
+  onParentGuardianChange = e => {
+    this.setState({ parentGuardian: e.target.value });
+  };
+
+  onPhoneNumberChange = e => {
+    this.setState({ phoneNumber: e });
+  };
+
+
   onSubmit = formProps => {
     const { pin } = this.state;
     const { formId } = this.props.match.params;
     const formCategoryId = process.env.REACT_APP_FORM_CATEGORY_ID_1;
     const { updateFormById, successSnackbar, errorSnackbar } = this.props;
 
+
+    const formData = new FormData();
+
+    this.setState({ gender: this.state.gender }, () => {
+      formData.delete("Gender");
+      formData.append("Gender", this.state.gender);
+    }); 
+
+    this.setState({ birthdate: this.state.birthdate }, () => {
+      formData.delete("Birthdate");
+      formData.append("Birthdate", this.state.birthdate);
+    }); 
+
+    this.setState({ gender: this.state.gender }, () => {
+      formData.delete("Gender");
+      formData.append("Gender", this.state.gender);
+    }); 
+
+    this.setState({ personality: this.state.personality }, () => {
+      formData.delete("MBTI");
+      formData.append("MBTI", this.state.personality);
+    }); 
+    
+
     const data = {
-      uid: `${formCategoryId}#${formProps["Name"].toLowerCase()}`,
-      name: `${formProps["Name"]} (${formProps["NIM"]})`,
+      uid: `${formCategoryId}#${this.state.nim}`,
+      name: `${this.state.name} (${this.state.nim})`,
       recipientEmails: [formProps["Email"].toLowerCase()],
+      "NIM": this.state.nim,
+      "Name": this.state.name,
+      "Study Program": this.state.studyProgram,
+      "Class": formProps["Email"],
+      "LINE ID": formProps["LINE ID"],
+      "Phone Number": this.state.phoneNumber,
+      "Parent/Guardian": formProps["Parent/Guardian"],
+      "Vegetarian": formProps["Vegetarian"],
+      "Fasting": formProps["Fasting"],
+      "Food Allergy": formProps["Food Allergy"],
+      "Chronic Disease": formProps["Chronic Disease"],
+      "Purpose of Joining": formProps["Purpose of Joining"],
       ...formProps
     };
-    const formData = new FormData();
     _.each(data, (value, key) => formData.append(key, value));
     formData.append("pin", pin);
 
@@ -223,7 +343,8 @@ class Form1Edit extends React.Component {
   };
 
   render() {
-    const { classes, handleSubmit } = this.props;
+
+    const { classes, handleSubmit, formValues } = this.props;
     const { status, submitStatus, pin } = this.state;
 
     return pin ? (
@@ -237,11 +358,9 @@ class Form1Edit extends React.Component {
             alignItems="center"
             className={classes.topDisplay}
           >
-            <Grid item sm={10}>
+            <Grid item sm={6}>
               <Fade bottom>
-                <Typography variant="h3" gutterBottom className={classes.title}>
-                  Leadership Development Camp 2019
-                </Typography>
+                <img alt="LDC_2020" src={Logo} style={{ width: "100%" }} />
               </Fade>
               <Fade bottom>
                 <Typography variant="subtitle1" className={classes.subtitle}>
@@ -305,17 +424,36 @@ class Form1Edit extends React.Component {
                               name="Class"
                               type="text"
                               label="Class"
+                              style={{ marginBottom: "1.5em" }}
                               component={this.renderField}
                               className={classes.textField}
                               required
+                              helperText="e.g: 18M3"
                             />
+                          </div>
+
+                          <div className={classes.textField}>
+                            <TextField
+                              name="Gender" 
+                              fullWidth 
+                              select 
+                              label="Gender"
+                              value={ this.state.gender !== '' ? this.state.gender: formValues["Gender"] } 
+                              className={classes.textField}
+                              style={{ flexGrow: 1, marginBottom: "1.5em" }}
+                              onChange={this.onGenderChange}
+                              required
+                            >
+                              <MenuItem name="Gender" value="Male">Male</MenuItem>
+                              <MenuItem name="Gender" value="Female">Female</MenuItem>
+                            </TextField>
                           </div>
 
                           <div>
                             <Field
-                              name="Line ID"
+                              name="LINE ID"
                               type="text"
-                              label="Line ID"
+                              label="LINE ID"
                               component={this.renderField}
                               className={classes.textField}
                               required
@@ -323,13 +461,18 @@ class Form1Edit extends React.Component {
                           </div>
 
                           <div>
-                            <Field
+                            <MuiPhoneNumber
                               name="Phone Number"
-                              type="number"
                               label="Phone Number"
-                              component={this.renderField}
-                              className={classes.textField}
+                              defaultCountry={'id'}
+                              onlyCountry={'id'}
+                              countryCodeEditable={false}
+                              disableDropdown={true}
+                              fullWidth
+                              style={{ margin: "1.5em 0" }}
                               required
+                              onChange={this.onPhoneNumberChange}
+                              value={ this.state.phoneNumber !== '' ? this.state.phoneNumber: formValues["Phone Number"] } 
                             />
                           </div>
 
@@ -337,32 +480,64 @@ class Form1Edit extends React.Component {
                             <Field
                               name="Email"
                               type="email"
-                              label="Email"
+                              label="Student Email"
+                              style={{ marginBottom: "1.5em" }}
                               component={this.renderField}
                               className={classes.textField}
                               required
-                              helperText={
-                                "Either student or private email is allowed."
-                              }
                             />
                           </div>
 
-                          <br />
-                          <br />
+                          <div>
+                            <TextField
+                              name="Birthdate"
+                              label="Birthdate"
+                              fullWidth
+                              type="date"
+                              style={{ marginBottom: "1.5em" }}
+                              value={ this.state.birthdate !== '' ? moment(this.state.birthdate).format("YYYY-MM-DD") : moment(formValues["Birthdate"]).format("YYYY-MM-DD")}
+                              className={classes.textField}
+                              InputLabelProps={{
+                                shrink: true,
+                              }}
+                              onChange={this.onBirthdateChange}
+                              required
+                            />
+
+                          </div>
+
+                          <div>
+                            <Field
+                              name="Parent/Guardian" 
+                              label="Parent/Guardian"
+                              type="text"
+                              style={{ marginBottom: "1.5em" }}
+                              component={this.renderField}
+                              className={classes.textField}
+                              required
+                              helperText="e.g. +628227328xxx - Budi - Parent"
+                            />
+                          </div>
+
+                          
+
                           <div className={classes.radioGroup}>
                             <Field
-                              name="Vegetarian/Non Vegetarian"
+                              name="Vegetarian"
                               type="text"
                               label="Vegetarian/Non Vegetarian"
                               component={this.renderRadio}
+                              style={{ marginBottom: "1.5em" }}
                               required
                             >
                               <FormControlLabel
+                                name="Vegetarian"
                                 value="Vegetarian"
                                 control={<Radio />}
                                 label="Vegetarian"
                               />
                               <FormControlLabel
+                                name="Vegetarian"
                                 value="Non Vegetarian"
                                 control={<Radio />}
                                 label="Non Vegetarian"
@@ -370,11 +545,34 @@ class Form1Edit extends React.Component {
                             </Field>
                           </div>
 
+                          <div className={classes.radioGroup}>
+                            <Field
+                              name="Fasting"
+                              type="text"
+                              label="Fasting/Not Fasting (Puasa/Tidak)"
+                              component={this.renderRadio}
+                              required
+                            >
+                              <FormControlLabel
+                                name="Fasting"
+                                value="Fasting"
+                                control={<Radio />}
+                                label="Fasting (Puasa)"
+                              />
+                              <FormControlLabel
+                                name="Fasting"
+                                value="Not Fasting"
+                                control={<Radio />}
+                                label="Not Fasting (Tidak Puasa)"
+                              />
+                            </Field>
+                          </div>
+
                           <div>
                             <Field
-                              name="Food Alergic"
+                              name="Food Allergy"
                               type="text"
-                              label="Food Alergic (Optional)"
+                              label="Food Allergy (Optional)"
                               component={this.renderField}
                               className={classes.textField}
                             />
@@ -390,21 +588,39 @@ class Form1Edit extends React.Component {
                             />
                           </div>
 
-                          <div>
-                            <Field
-                              name="Personality Test Result"
-                              type="text"
-                              label="Personality Test Result (Ex: ENFJ)"
-                              component={this.renderField}
+                          <div className={classes.textField}>
+                            <TextField
+                              name="MBTI" 
+                              fullWidth 
+                              select 
+                              label="MBTI Personality Test Result"
+                              value={ this.state.personality !== '' ? this.state.personality: formValues["MBTI"] } 
                               className={classes.textField}
+                              style={{ flexGrow: 1 }}
+                              onChange={this.onPersonalityChange}
                               required
-                            />
-                            <Typography
-                              variant="body2"
-                              style={{ color: "#9C9C9C" }}
                             >
+                              <MenuItem name="MBTI" value="INTJ">INTJ</MenuItem>
+                              <MenuItem name="MBTI" value="INTP">INTP</MenuItem>
+                              <MenuItem name="MBTI" value="ENTJ">ENTJ</MenuItem>
+                              <MenuItem name="MBTI" value="ENTP">ENTP</MenuItem>
+                              <MenuItem name="MBTI" value="INFJ">INFJ</MenuItem>
+                              <MenuItem name="MBTI" value="INFP">INFP</MenuItem>
+                              <MenuItem name="MBTI" value="ENFJ">ENFJ</MenuItem>
+                              <MenuItem name="MBTI" value="ENFP">ENFP</MenuItem>
+                              <MenuItem name="MBTI" value="ISTJ">ISTJ</MenuItem>
+                              <MenuItem name="MBTI" value="ISFJ">ISFJ</MenuItem>
+                              <MenuItem name="MBTI" value="ESTJ">ESTJ</MenuItem>
+                              <MenuItem name="MBTI" value="ESFJ">ESFJ</MenuItem>
+                              <MenuItem name="MBTI" value="ISTP">ISTP</MenuItem>
+                              <MenuItem name="MBTI" value="ISFP">ISFP</MenuItem>
+                              <MenuItem name="MBTI" value="ESTP">ESTP</MenuItem>
+                              <MenuItem name="MBTI" value="ESFP">ESFP</MenuItem>
+                            </TextField>
+
+                            <Typography variant="body2" style={{ color: "#9C9C9C", marginBottom: "1.5em" }}>
                               <p>
-                                Take the test{" "}
+                                Take a MBTI personality test{" "}
                                 <a
                                   target="_blank"
                                   rel="noopener noreferrer"
@@ -415,8 +631,7 @@ class Form1Edit extends React.Component {
                               </p>
                             </Typography>
                           </div>
-
-                          <br />
+                          
                           <br />
                           <div>
                             <Field
@@ -517,10 +732,11 @@ function mapStateToProps(state, ownProps) {
     initialValues:
       form && form.data
         ? {
-            ...form.data
+            ...form.data,
           }
         : {},
-    ...form
+    ...form,
+    formValues: getFormValues('Form1Edit')(state),
   };
 }
 

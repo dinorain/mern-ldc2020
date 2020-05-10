@@ -9,7 +9,7 @@ import SlideShow from "./SlideShow";
 import TopDisplay from "./TopDisplay";
 import Description from "./Description";
 import Slogan from "./Slogan";
-import ComeAndJoinUs from "./ComeAndJoinUs";
+// import ComeAndJoinUs from "./ComeAndJoinUs";
 import Competitions from "./Competitions";
 import Footer from "./Footer";
 
@@ -118,7 +118,7 @@ class MainIndex extends Component {
           <TopDisplay passedRef={this.topDisplayRef} />
           <Description passedRef={this.descriptionRef} />
           <Slogan passedRef={this.sloganRef} />
-          <ComeAndJoinUs passedRef={this.comeAndJoinUsRef} />
+          {/* <ComeAndJoinUs passedRef={this.comeAndJoinUsRef} /> */}
           <Competitions passedRef={this.competitionsRef} />
           <Footer passedRef={this.footerRef} />
         </div>

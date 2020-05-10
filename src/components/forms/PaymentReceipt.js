@@ -193,7 +193,7 @@ class PaymentReceipt extends React.Component {
                   align="center"
                   style={{ color: "white", fontWeight: "bold" }}
                 >
-                  Leadership Development Camp 2019
+                  Leadership Development Camp 2020
                 </Typography>
               </Fade>
               <Fade bottom>

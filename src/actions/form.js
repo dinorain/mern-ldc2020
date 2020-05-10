@@ -94,7 +94,6 @@ export const checkPinSet = (formId, callback) => async () => {
 };
 
 export const checkPinValid = (formId, params, callback) => async () => {
-  console.log(params);
   try {
     const response = await regApi().post(
       `/forms/${formId}/pin/valid`,
